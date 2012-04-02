@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: GuidePress, webfactory
+Contributors: GuidePress, WebFactory
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3MX23YDX9XU3Y
 Tags: guidepress, tutorials, video tutorials, screencasts, help videos, help, learn, training, training videos, instructions
 Requires at least: 3.3.1
