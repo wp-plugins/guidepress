@@ -4,7 +4,7 @@ Plugin Name: GuidePress
 Plugin URI: http://guidepress.net/
 Description: Quick video tutorials
 Author: Guidepress
-Version: 1.0
+Version: 0.3
 Author URI: http://www.guidepress.net/
 */
 
