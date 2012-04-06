@@ -2,7 +2,7 @@
 /*
 Plugin Name: GuidePress
 Plugin URI: http://guidepress.net/
-Description: Quick video tutorials
+Description: Video Tutorials for learning WordPress at your fingertips. 
 Author: Guidepress
 Version: 0.3
 Author URI: http://www.guidepress.net/
