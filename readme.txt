@@ -10,7 +10,7 @@ The GuidePress plugin puts WordPress videos tutorials right into the the WP dash
 
 == Description ==
 
-**Please don't download yet. Plugin currently has some bugs and will try to get it working by 12/04/12**
+**Please don't download yet. Plugin currently has some bugs and we will try to get it working by 12/04/12**
 
 
 The GuidePress plugin delivers WordPress video tutorials straight into the WordPress Dashboard. It's perfect if you're new to WordPress or if you're a developer who wants to use it as a training guide for your clients (which will save you a lot of time and let your clients learn at their own pace).
