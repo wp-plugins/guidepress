@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: guidepress, tutorials, video tutorials, screencasts, help videos, help, learn, training, training videos, instructions
 Requires at least: 3.3.1
 Tested up to: 3.3.1
-Stable tag: 0.3.01
+Stable tag: 0.3
 
 The GuidePress plugin puts WordPress videos tutorials right into the the WP dashboard! It's a handy companion for new and seasoned WP users. 
 
