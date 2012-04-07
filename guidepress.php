@@ -2,9 +2,9 @@
 /*
 Plugin Name: GuidePress
 Plugin URI: http://guidepress.net/
-Description: Video Tutorials to learning WordPress at your fingertips. 
+Description: Video Tutorials for learning WordPress at your fingertips. 
 Author: Guidepress
-Version: 0.3
+Version: 0.1
 Author URI: http://www.guidepress.net/
 */
 
