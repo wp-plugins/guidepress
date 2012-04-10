@@ -1,13 +1,13 @@
-.client.video-container {
+.cgp.video-container {
 }
 
-.client.video-container .video-box {
+.cgp.video-container .video-box {
   float:left;
   width:250px;
   padding:20px;
 }
 
-.client.video-container .video-actions {
+.cgp.video-container .video-actions {
   
 }
 
@@ -97,15 +97,6 @@ span.guidepress_title {
 }
 
 /* Guidpress Playlist */
-
-.clear {
-  clear:both;
-}
-
-.odd {
-  background-color: #f1f1f1 !important;
-}
-
 #guidepress_video_list {background-color: #222222}
 
 .guidpress_playlist_video {
@@ -127,12 +118,16 @@ span.guidepress_title {
   background-color: #ffffff
 }
 
-.active {
+.guidpress_playlist_video.active {
   background-color: #ffffff
 }
 
-.comments {
-		font-weight:bold;
+#guidepress_main_video .comments {
+		font-weight:bold !important;
+}
+
+#guidpress_video_useful_links a {
+    font-weight:bold !important;  
 }
 
 .guidpress_playlist_video:hover .guidpress_playlist_title {
@@ -173,7 +168,7 @@ span.guidepress_title {
   padding: 4px;
 }
 
-a {
+#guidepress_container a{
 	text-decoration:none
 }
 

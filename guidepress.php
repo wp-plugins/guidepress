@@ -2,24 +2,40 @@
 /*
 Plugin Name: GuidePress
 Plugin URI: http://guidepress.net/
-Description: Video Tutorials for learning WordPress at your fingertips. 
-Author: Guidepress
+Description: The GuidePress plugin puts WordPress video tutorials right into the the WP dashboard! It's a handy companion for new and seasoned WP users.
+Author: GuidePress
 Version: 0.1
-Author URI: http://www.guidepress.net/
+Author URI: http://guidepress.net/
+
+@license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+Copyright (c) 2012, GuidePress.net.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+
 
 if (!function_exists('add_action')) {
   die('Please don\'t open this file directly!');
 }
 
-global $wpdb;
 define('CGP_DIR', plugin_dir_url(__FILE__));
 
 require_once('gp-ajax.php');
 require_once('videopress-player.php');
 
 class client_gp {
-
   // Init
   function init() {
     if (is_admin()) {
@@ -52,129 +68,16 @@ class client_gp {
       add_action('admin_footer', array(__CLASS__, 'guidepress_tab_content'));
       
       // add div elements for dialog content
-      add_action('admin_footer', array(__CLASS__, 'prep_dialog'));      
-      
-      // add script for fancybox
-      add_action('admin_footer', array(__CLASS__, 'fancybox_script'));
+      add_action('admin_footer', array(__CLASS__, 'prep_dialog'));
       
       // add dialog for subscription activation, new account creation and forgotten username
       add_action('admin_footer', array(__CLASS__, 'activate_subscription_message'));
       
       // send comments to master server
       add_action('admin_footer', array(__CLASS__, 'leave_comment'));
-
-      
-
     } // if (is_admin)
   } // init
-  
-  
-  // Cron Function
-  function gp_hourly() {
-    global $wpdb;
-    
-    // Vars
-    $errors = array();
-    $output = array();
-    $total_videos = 0;
-    $client_status = 'Free';
-    $tmp_meta = '';
-    $inputs = client_gp::fetch_options();
-    
-    // Setup username and domain data
-    $params = "?username=" . $inputs['username'] . "&password=" . $inputs['password'];
-    
-    $ch = curl_init();
-    
-    curl_setopt($ch, CURLOPT_URL, API_URL . $params);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_POST, 0);
-    
-    // grab URL and pass it to the browser
-    $response = curl_exec($ch);
-    curl_close($ch);
 
-    // Unserialize response
-    $unserialized_response = unserialize($response);
-    
-    // If Master Response is valid and contains required data...
-    if ($unserialized_response && is_array($unserialized_response) && !isset($unserialized_response['error'])) {
-      
-      // Delete Old tutorials
-      $posts = get_posts(array('post_type'=>'video-tutorials', 'numberposts'=>'-1'));
-      foreach ($posts as $post) {
-        wp_delete_post($post->ID);
-      }
-      
-      // Loop for inserting new videos in Client database
-      foreach ($unserialized_response as $post_item) {
-        // Save post meta to tmp and unset
-        $tmp_meta = $post_item->post_meta;
-        
-        // Unset unneeded data
-        unset($post_item->post_meta);
-        unset($post_item->ID);
-        
-        // If video does not have "exclude" flag status, retrive it
-        if ($tmp_meta['status'] != 'exclude') {
-          
-          // Video level (Beginner, advanced etc..)
-          $tmp_meta['level'] = str_replace('-', ' ', $tmp_meta['level']);
-          $tmp_meta['level'] = ucfirst($tmp_meta['level']);
-          // Video status (Up to date, old but relevant etc...)
-          $tmp_meta['status'] = str_replace('-', ' ', $tmp_meta['status']);
-          $tmp_meta['status'] = ucfirst($tmp_meta['status']);
-          
-          // Add new post to custom post type "video-tutorials"
-          $new_post_id = wp_insert_post($post_item);
-          
-          // Update youtube video meta for new post
-          update_post_meta($new_post_id, 'youtube', $tmp_meta['youtube']);
-          
-          // Update videopress meta for new post
-          if (isset($tmp_meta['videopress'])) {
-            // And set the new client status as "Premium"
-            $client_status = 'Premium';
-            update_post_meta($new_post_id, 'videopress', $tmp_meta['videopress']);
-          }
-          
-          // Update category settings for new post
-          if (is_array($tmp_meta['category'])) {
-            foreach ($tmp_meta['category'] as $cat) {
-              $name = explode('.', $cat->name);
-              add_post_meta($new_post_id, 'category', $name[0]);
-            }
-          }
-                    
-          // Update post order
-          if ($tmp_meta['order']) {
-            foreach ($tmp_meta['order'] as $ord => $pos) {
-              foreach ($pos as $order => $value) {
-                update_post_meta($new_post_id, $order, $value);
-              }
-            }
-          }
-          
-          // Get all other meta data for new post
-          update_post_meta($new_post_id, 'description', $tmp_meta['description']);
-          update_post_meta($new_post_id, 'level',       $tmp_meta['level']);
-          update_post_meta($new_post_id, 'status',      $tmp_meta['status']);
-          update_post_meta($new_post_id, 'links',       $tmp_meta['links']);
-          update_post_meta($new_post_id, 'comment_count',       $tmp_meta['comment_count']);
-          
-          // Count how many videos are added
-          $total_videos++;
-        } // if ($tmp_meta['status'] != 'exclude')
-      } // foreach ($unserialized_response)
-      
-      // Update client status - just for refreshing status from Free to Premium or otherwise
-      update_option('client_gp_type', $client_status);
-    } 
-    
-    die('1');
-  } // do_this_hourly
-  
 
   // Add content to Guidepress tab
   function guidepress_tab_content() {
@@ -216,7 +119,7 @@ class client_gp {
     $tutorials = query_posts($query);
     
     // Content output
-    echo '<div id="guidepress_content">
+    echo '<div id="guidepress_content" style="display:none;">
             <div id="guidepress_container">';
     
     // If query was successful and there are any posts...
@@ -335,21 +238,6 @@ class client_gp {
                                    'title' => 'GuidePress Video tutorials',
                                    'href' => '#'));
   } // add_admin_bar_guidepress
-
-  
-  // Add Fancy Box Script
-  function fancybox_script() {
-      echo "<script type='text/javascript'>
-            jQuery(document).ready(function(){
-              jQuery('.various').fancybox({'transitionIn'  : 'none',
-                                           'transitionOut'  : 'none'});
-  
-              jQuery('.various-inline').fancybox({'titlePosition'    : 'inside',
-                                                  'transitionIn'    : 'none',
-                                                  'transitionOut'    : 'none'});
-            });
-            </script>";       
-  } // scripts
   
   
   // Divs for Dialogs
@@ -378,7 +266,7 @@ class client_gp {
     $url = $_SERVER['PHP_SELF'];
     $category = $current_screen->id;
     
-    $output .= '<div class="client video-container">';
+    $output .= '<div class="cgp video-container">';
     $output .= '<div id="error">Please register if you wish to view this video!</div>';
               
     // Fetch all videos for current menu
@@ -616,7 +504,7 @@ class client_gp {
       echo '<div id="message" class="updated"><p><strong>GuidePress is almost ready.</strong> You must <a href="#" class="subscribe-dialog">activate your subscription</a> for it to work.</p></div>';
 		// }
     
-    echo '<div id="subscribe-dialog">';
+    echo '<div id="subscribe-dialog" style="display:none;">';
     // Logo
     echo '<div align="center">
           <img src="' . plugins_url('images/logo.png', __FILE__) . '" width="275" height="95" alt="GuidePress" />
@@ -649,7 +537,6 @@ class client_gp {
   
   
   function admin_enqueue_scripts() {
-      wp_enqueue_style('client-gp-fancybox-style', plugins_url('fancybox/jquery.fancybox-1.3.4.css', __FILE__), array(), '1.0.0');
       wp_enqueue_style('wp-jquery-ui-dialog');
       wp_enqueue_style('client-gp-style', plugins_url('css/gp.css', __FILE__), array(), '1.0.0');
   } // admin_enqueue_scripts
@@ -657,10 +544,6 @@ class client_gp {
   
   function admin_footer_enqueus() {
       wp_enqueue_script('gp-video-client-common', plugins_url('js/gp-common.js', __FILE__), array(), '1.0.0');
-      wp_enqueue_script('gp-video-client-fancybox-mousewheel', plugins_url('fancybox/jquery.mousewheel-3.0.4.pack.js', __FILE__), array(), '1.0.0');
-      wp_enqueue_script('gp-video-client-fancybox-main', plugins_url('fancybox/jquery.fancybox-1.3.4.pack.js', __FILE__), array(), '1.0.0');
-      wp_enqueue_script('gp-video-client-fancybox-main2', plugins_url('fancybox/jquery.fancybox-1.3.4.js', __FILE__), array(), '1.0.0');
-      wp_enqueue_script('gp-video-client-fancybox-main3', plugins_url('fancybox/jquery.easing-1.3.pack.js', __FILE__), array(), '1.0.0');   
       wp_enqueue_script('jquery-ui-dialog');
   } // admin_footer_enqueus
   
@@ -698,14 +581,141 @@ class client_gp {
       return $url;
     }
   } // youtube_id
- 
+  
+  
+  // Activate plugin
+  function activate() {
+  } // activate
+  
+  
+  // Deactivate plugin
+  function deactivate() {
+    wp_clear_scheduled_hook('gp_update_cron');
+  } // deactivate
+  
+  
+  // Update cRon
+  function gp_update_cron() {
+    global $wpdb;
+    
+    // Vars
+    $errors = array();
+    $output = array();
+    $total_videos = 0;
+    $client_status = 'Free';
+    $tmp_meta = '';
+    $inputs = self::fetch_options();
+    
+    // Setup username and domain data
+    $params = "?username=" . $inputs['username'] . "&password=" . $inputs['password'] . "&domain=" . $_SERVER['HTTP_HOST'];
+    
+    $ch = curl_init();
+    
+    curl_setopt($ch, CURLOPT_URL, API_URL . $params);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 0);
+    
+    // grab URL and pass it to the browser
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    // Unserialize response
+    $unserialized_response = unserialize($response);
+    
+    // If Master Response is valid and contains required data...
+    if ($unserialized_response && is_array($unserialized_response) && !isset($unserialized_response['error'])) {
+      // Delete Old tutorials
+      $posts = get_posts(array('post_type'=>'video-tutorials', 'numberposts'=>'-1'));
+      foreach ($posts as $post) {
+        wp_delete_post($post->ID);
+      }
+
+      // Loop for inserting new videos in Client database
+      foreach ($unserialized_response as $post_item) {
+  
+        // Save post meta to tmp and unset
+        $tmp_meta = $post_item->post_meta;
+        
+        // Unset unneeded data
+        unset($post_item->post_meta);
+        unset($post_item->ID);
+        
+        // If video does not have "exclude" flag status, retrive it
+        if ($tmp_meta['status'] != 'exclude') {
+          
+          // Video level (Beginner, advanced etc..)
+          $tmp_meta['level'] = str_replace('-', ' ', $tmp_meta['level']);
+          $tmp_meta['level'] = ucfirst($tmp_meta['level']);
+          // Video status (Up to date, old but relevant etc...)
+          $tmp_meta['status'] = str_replace('-', ' ', $tmp_meta['status']);
+          $tmp_meta['status'] = ucfirst($tmp_meta['status']);
+          
+          // Add new post to custom post type "video-tutorials"
+          $new_post_id = wp_insert_post($post_item);
+          
+          // Update youtube video meta for new post
+          update_post_meta($new_post_id, 'youtube', $tmp_meta['youtube']);
+          
+          // Update videopress meta for new post
+          if (isset($tmp_meta['videopress'])) {
+            // And set the new client status as "Premium"
+            $client_status = 'Premium';
+            update_post_meta($new_post_id, 'videopress', $tmp_meta['videopress']);
+          }
+          
+          // Update category settings for new post
+          if (is_array($tmp_meta['category'])) {
+            foreach ($tmp_meta['category'] as $cat) {
+              $name = explode('.', $cat->name);
+              add_post_meta($new_post_id, 'category', $name[0]);
+            }
+          }
+                    
+          // Update post order
+          if ($tmp_meta['order']) {
+            foreach ($tmp_meta['order'] as $ord => $pos) {
+              foreach ($pos as $order => $value) {
+                update_post_meta($new_post_id, $order, $value);
+              }
+            }
+          }
+          
+          // Get all other meta data for new post
+          update_post_meta($new_post_id, 'description', $tmp_meta['description']);
+          update_post_meta($new_post_id, 'level',       $tmp_meta['level']);
+          update_post_meta($new_post_id, 'status',      $tmp_meta['status']);
+          update_post_meta($new_post_id, 'links',       $tmp_meta['links']);
+          update_post_meta($new_post_id, 'comment_count',       $tmp_meta['comment_count']);
+          
+          // Count how many videos are added
+          $total_videos++;
+        } // if ($tmp_meta['status'] != 'exclude')
+      } // foreach ($unserialized_response)
+
+      // Update client status - just for refreshing status from Free to Premium or otherwise
+      update_option('client_gp_type', $client_status);
+    } 
+  } // gp_update_cron
+  
+  
 } // class client_gp
 
-add_action('init', array('client_gp','init'));
+add_action('init', array('client_gp', 'init'));
+register_activation_hook(__FILE__, array('client_gp', 'activate'));
+register_deactivation_hook(__FILE__, array('client_gp', 'deactivate'));
 
-// Cron 
-add_action('do_this_hourly', array('client_gp', 'gp_hourly')); 
-if (!wp_next_scheduled('do_this_hourly')) {
-  wp_schedule_event(time(), 'hourly', 'do_this_hourly');
+// Cron
+add_action('gp_update_cron', 'gp_update_cron', 1);
+
+//make new schedule round
+if (!wp_next_scheduled('gp_update_cron')) {
+  wp_schedule_event(time(), 'hourly', 'gp_update_cron');
 }
+
+// Cron Function
+function gp_update_cron() {
+  client_gp::gp_update_cron();
+} // gp_update_cron3
+
 ?>

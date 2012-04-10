@@ -357,6 +357,4 @@ jQuery(document).ready(function($) {
           }
       }]
   }); // jQuery Comment dialog
-  
-  
 }); // jQuery

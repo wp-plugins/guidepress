@@ -1,16 +1,25 @@
 <?php
 /*
-  Client GuidePress Ajax
-  AJAX endpoint
-  (c) 2011. Web factory Ltd
-*/ 
+Copyright (c) 2012, GuidePress.net.
 
-define('API_URL', 'http://wpdev4.webfactoryltd.com/wp-content/plugins/master-guidepress/index.php');
-define('E_MAIL', 'hrvoje.krbavac@gmail.com');
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
+
+define('API_URL', 'http://guidepress.net/wp-content/plugins/master-guidepress/index.php');
 
 class client_gp_ajax extends client_gp {
-  
-  
   // Show embed code for user selected video
   function ajax_callback_fetch_video() {
     // Vars

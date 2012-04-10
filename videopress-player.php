@@ -735,7 +735,7 @@ class VideoPress_Player {
           $cache_key_pieces[] = 1;
       }
       $cache_key_pieces[] = $guid;
-      if ( $width > 0 )
+      if ( @$width > 0 )
         $cache_key_pieces[] = $maxwidth;
       if ( is_ssl() )
         $cache_key_pieces[] = 'ssl';
