@@ -54,7 +54,7 @@ We are constantly adding new video tutorials to our library, sometimes daily. Th
 
 = Can I manually update the feed =
 
-Yes, you can do this by going to the GuidePress settings screen. Please follow us on twitter at @GuidePress_WP if you want to keep up to date with the latest video tutorials. 
+Yes, you can do this by going to the GuidePress settings screen. Please [follow us on twitter](http://twitter.com/#!/GuidePress_WP "GuidePress Twitter account") if you want to keep up to date with the latest video tutorials. 
 
 = Why are there only a small number of video tutorials =
 
@@ -71,6 +71,10 @@ Yes, they are available if you sign up to our premium subscription.
   
 
 == Changelog ==
+
+= 0.1.1 =
+* 10/04/12
+* A few bug fixes
 
 = 0.1 =
 * 07/04/12
