@@ -22,10 +22,10 @@ You'll need a subscription to use this plugin. By default we give you a free sub
 
 Main features include:
 
-* Watch video tutorials without leaving the WordPress dashboard. 
-* Videos are discretely placed inside a "video tutorials" dropdown tab. 
-* New video tutorials are added every week.
-* Videos are categorised into beginner, intermediate, and advanced level.
+* Watch video tutorials without leaving the WordPress dashboard 
+* Videos are discretely placed inside a "video tutorials" dropdown tab 
+* New video tutorials are added every week
+* Videos are categorised into beginner, intermediate, and advanced level
 
 
 
@@ -73,11 +73,11 @@ Yes, they are available if you sign up to our premium subscription.
 == Changelog ==
 
 = 0.1 =
-* 10/04/12
+* 07/04/12
 * Initial beta release.
 
 
 == Upgrade Notice ==
 
-= 0.3 =
+= 0.1 =
 Initial beta release.
