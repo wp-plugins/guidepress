@@ -4,20 +4,22 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: guidepress, tutorials, video tutorials, screencasts, help videos, help, learn, training, training videos, instructions
 Requires at least: 3.3.1
 Tested up to: 3.3.1
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 
 The GuidePress plugin puts WordPress videos tutorials right into the the WP dashboard! It's a handy companion for new and seasoned WP users. 
 
 == Description ==
 
-**Please don't download yet. Plugin currently has some bugs and will try to get it working by 12/04/12**
+The GuidePress plugin delivers WordPress video tutorials straight into the WordPress Dashboard. The GuidePress plugin is perfect if you are:
 
+* New to WordPress and want to quickly learn how to use WordPress by watching short how-to videos. This visual approach is a much a faster way of learning because you can actually see how to do things rather than reading guides and figuring it for yourself. All the videos are cleverly organised and placed within the relevant admin screens, this means that you only watch the videos you're interested rather than watch them all in sequence. 
+* A Web Developer and you want to use GuidePress to train your clients. By using GuidePress it means that you can spend less time explaining to your clients how to use WordPress. It also means that your clients learn at their own pace will send you fewer emails asking for help.
 
-The GuidePress plugin delivers WordPress video tutorials straight into the WordPress Dashboard. It's perfect if you're new to WordPress or if you're a developer who wants to use it as a training guide for your clients (which will save you a lot of time and let your clients learn at their own pace).
+You'll need a subscription to use this plugin. Simply create a [free GuidePress account](http://guidepress.net/wp-login.php?action=register "GuidePress Registration Screen") and you'll automatically get a lifetime free subscription. 
 
-You'll need a subscription to use this plugin. By default we give you a free subscription when you create a [free GuidePress account](http://guidepress.net/wp-login.php?action=register "GuidePress Registration Screen"). We also offer a [Premium subscription](http://guidepress.net/pricing/ "GuidePress Premium Subscription"). 
+We also offer a [Premium subscription](http://guidepress.net/pricing/ "GuidePress Premium Subscription").
 
-**Note:** At the moment we have only published a small number of video tutorials. But we will be adding lots more in the coming weeks. 
+**Note:** We only have a small number of video at the moment. But we'll be adding more in the coming weeks. 
 
 
 Main features include:
@@ -26,7 +28,6 @@ Main features include:
 * Videos are discretely placed inside a "video tutorials" dropdown tab 
 * New video tutorials are added every week
 * Videos are categorised into beginner, intermediate, and advanced level
-
 
 
 == Installation ==
@@ -71,6 +72,10 @@ Yes, they are available if you sign up to our premium subscription.
   
 
 == Changelog ==
+
+= 0.1.2 =
+* 12/04/12
+* A couple of bug fixes. 
 
 = 0.1.1 =
 * 10/04/12

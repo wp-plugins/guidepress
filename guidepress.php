@@ -4,7 +4,7 @@ Plugin Name: GuidePress
 Plugin URI: http://guidepress.net/
 Description: The GuidePress plugin puts WordPress video tutorials right into the the WP dashboard! It's a handy companion for new and seasoned WP users.
 Author: GuidePress
-Version: 0.1.1
+Version: 0.1.2
 Author URI: http://guidepress.net/
 
 @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -500,9 +500,9 @@ class client_gp {
   // display warning if test were never run
   function activate_subscription_message() {
     
-  	//	if (get_option('client_gp_active') != 'true') {
+  	if (get_option('client_gp_active') != 'true') {
       echo '<div id="message" class="updated"><p><strong>GuidePress is almost ready.</strong> You must <a href="#" class="subscribe-dialog">activate your subscription</a> for it to work.</p></div>';
-		// }
+		}
     
     echo '<div id="subscribe-dialog" style="display:none;">';
     // Logo
@@ -521,7 +521,7 @@ class client_gp {
     // Form
     echo '<form method="POST" action="" id="verify-form">';
     echo '<label for="username_dlg"><strong>Username:</strong> <input type="text" id="username_dlg" name="username_dlg" value="' . $inputs['username'] . '" /></label>';
-    echo '<label for="password_dlg"><strong>Password:</strong> <input type="text" id="password_dlg" name="password_dlg" value="' . $inputs['password'] . '" /></label>';
+    echo '<label for="password_dlg"><strong>Password:</strong> <input type="password" id="password_dlg" name="password_dlg" value="' . $inputs['password'] . '" /></label>';
     echo '<input type="submit" name="verify-form-submit" id="verify-form-submit" value="Verify!" />';
     echo '</form>';
     
@@ -591,6 +591,9 @@ class client_gp {
   // Deactivate plugin
   function deactivate() {
     wp_clear_scheduled_hook('gp_update_cron');
+    delete_option('client_gp_active');
+    delete_option('client_gp_type');
+    delete_option('client_gp');
   } // deactivate
   
   
