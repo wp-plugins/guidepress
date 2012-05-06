@@ -4,16 +4,16 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: guidepress, tutorials, video tutorials, screencasts, help videos, help, learn, training, training videos, instructions
 Requires at least: 3.3.1
 Tested up to: 3.3.1
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 
-The GuidePress plugin puts WordPress videos tutorials right into the the WP dashboard! It's a handy companion for new and seasoned WP users. 
+The GuidePress plugin puts WordPress videos tutorials right to the WP dashboard! It's a handy companion for new and seasoned WP users. 
 
 == Description ==
 
-The GuidePress plugin delivers WordPress video tutorials straight into the WordPress Dashboard. The GuidePress plugin is perfect if you are:
+The [GuidePress plugin](http://guidepress.net "GuidePress") delivers WordPress video tutorials straight to the WordPress Dashboard. The GuidePress plugin is perfect if you are:
 
-* New to WordPress and want to quickly learn how to use WordPress by watching short how-to videos. This visual approach is a much a faster way of learning because you can actually see how to do things rather than reading guides and figuring it for yourself. All the videos are cleverly organised and placed within the relevant admin screens, this means that you only watch the videos you're interested rather than watch them all in sequence. 
-* A Web Developer and you want to use GuidePress to train your clients. By using GuidePress it means that you can spend less time explaining to your clients how to use WordPress. It also means that your clients learn at their own pace will send you fewer emails asking for help.
+* **A WordPress Novice** - With GuidePress you can quickly learn how to use WordPress by watching short how-to videos. This visual approach is a much a faster way of learning because you actually see how to do things rather than reading guides and figuring it for yourself. All the videos are cleverly organised and placed within the relevant admin screens, this means that you only watch the videos you're interested rather than watch them all in sequence. 
+* **A WordPress Developer** - You can let GuidePress train your clients for you. Using GuidePress means that you spend less time explaining to your clients how to use WordPress. It also means that your clients learn at their own pace and will send you fewer support request emails.
 
 You'll need a subscription to use this plugin. Simply create a [free GuidePress account](http://guidepress.net/wp-login.php?action=register "GuidePress Registration Screen") and you'll automatically get a lifetime free subscription. 
 
@@ -72,6 +72,10 @@ Yes, they are available if you sign up to our premium subscription.
   
 
 == Changelog ==
+
+= 0.1.3 =
+* 06/05/12
+* Remove the redundant save changes button at the bottom of the settings page.  
 
 = 0.1.2 =
 * 12/04/12

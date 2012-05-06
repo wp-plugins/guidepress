@@ -4,7 +4,7 @@ Plugin Name: GuidePress
 Plugin URI: http://guidepress.net/
 Description: The GuidePress plugin puts WordPress video tutorials right into the the WP dashboard! It's a handy companion for new and seasoned WP users.
 Author: GuidePress
-Version: 0.1.2
+Version: 0.1.3
 Author URI: http://guidepress.net/
 
 @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -455,7 +455,7 @@ class client_gp {
     echo '<input type="hidden" name="username" id="username" value="' . $inputs['username'] . '" />';
     echo '<input type="hidden" name="password" id="password" value="' . $inputs['password'] . '" />';
     
-    echo '<p class=""><input type="submit" value="Save Changes" class="button-primary" name="Submit" /></p>';
+    // echo '<p class=""><input type="submit" value="Save Changes" class="button-primary" name="Submit" /></p>';
     
     echo '</form>';
     echo '</div>';
@@ -521,9 +521,13 @@ class client_gp {
     // Form
     echo '<form method="POST" action="" id="verify-form">';
     echo '<label for="username_dlg"><strong>Username:</strong> <input type="text" id="username_dlg" name="username_dlg" value="' . $inputs['username'] . '" /></label>';
+    echo '<br/>';
     echo '<label for="password_dlg"><strong>Password:</strong> <input type="password" id="password_dlg" name="password_dlg" value="' . $inputs['password'] . '" /></label>';
+    echo '<br/>';    
     echo '<input type="submit" name="verify-form-submit" id="verify-form-submit" value="Verify!" />';
     echo '</form>';
+    
+    echo '<br/>';
     
     // Forgot username / dont have acc?
     echo '<a href="http://guidepress.net/wp-login.php?action=lostpassword" target="_blank" class="forgotten-username">Forgotten username?</a> or <a href="http://guidepress.net/wp-login.php?action=register" target="_blank" class="create-an-account">Create an account</a>';
