@@ -4,7 +4,7 @@ Plugin Name: GuidePress
 Plugin URI: http://guidepress.net/
 Description: The GuidePress plugin puts WordPress video tutorials right into the the WP dashboard! It's a handy companion for new and seasoned WP users.
 Author: GuidePress
-Version: 0.1.3
+Version: 0.1.4
 Author URI: http://guidepress.net/
 
 @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html

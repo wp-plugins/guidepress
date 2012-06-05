@@ -86,9 +86,25 @@ jQuery(document).ready(function($) {
       if (response == '0' || response == 'false') {
         $('#subscribe-dialog').prepend('<div class="error"><p>Your account couldn\'t be verified!</p></div>');
       } else {
-        $('#subscribe-dialog').prepend('<div class="updated"><p>Your account was successfully verified!</p></div>');
+        // data
+        var data = {action: 'client_api', username: jQuery('#username_dlg').val(), password: jQuery('#password_dlg').val()};
+        // ajax call to update video library
+        jQuery.post(ajaxurl, data, function(response) {
+          $('#subscribe-dialog').prepend('<div class="updated"><p>Your account was successfully verified!</p></div>');
+          if (!response) {
+            alert('Bad AJAX response. Please reload the page.');
+          } else {
+            var json_response = jQuery.parseJSON(response);
+            jQuery('.updated', '#subscribe-dialog').append('<p>Your GuidePress video library has been updated!</p>');
+            if (json_response.errors_number > 0) {
+              jQuery('.updated', '#subscribe-dialog').append('<p>There were some errors while updating your GuidePress video library</p>');
+              jQuery('.updated', '#subscribe-dialog').html('<br/><b>Errors:</b> ' + json_response.errors);
+            }
+          } // if
+        }); // jQuery.post
       } // if
     }); // jQuery.post
+    
     return false;
   });
 
@@ -285,7 +301,6 @@ jQuery(document).ready(function($) {
       if (!response) {
         alert('Bad AJAX response. Please reload the page.');
       } else {
-        console.log(response);
         var json_response = jQuery.parseJSON(response);
         jQuery('#cgp-update-message').hide();
         button.removeAttr('disabled');
@@ -324,7 +339,7 @@ jQuery(document).ready(function($) {
   // Define Subscribe Dialog
   $('#subscribe-dialog').dialog({
       autoOpen: false,
-      height: 350,
+      height: 400,
       width: 500,
       dialogClass: 'wp-dialog',
       modal: true,

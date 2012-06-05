@@ -2,11 +2,12 @@
 Contributors: GuidePress, WebFactory
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3MX23YDX9XU3Y
 Tags: guidepress, tutorials, video tutorials, screencasts, help videos, help, learn, training, training videos, instructions
-Requires at least: 3.3.1
-Tested up to: 3.3.1
-Stable tag: 0.1.3
+License: GPLv2 or later
+Requires at least: 3.3
+Tested up to: 3.3.2
+Stable tag: 0.1.4
 
-The GuidePress plugin puts WordPress videos tutorials right to the WP dashboard! It's a handy companion for new and seasoned WP users. 
+The GuidePress plugin puts WordPress videos tutorials right into the WP dashboard! It's a handy companion for new and seasoned WP users. 
 
 == Description ==
 
@@ -17,13 +18,12 @@ The [GuidePress plugin](http://guidepress.net "GuidePress") delivers WordPress v
 
 You'll need a subscription to use this plugin. Simply create a [free GuidePress account](http://guidepress.net/wp-login.php?action=register "GuidePress Registration Screen") and you'll automatically get a lifetime free subscription. 
 
-We also offer a [Premium subscription](http://guidepress.net/pricing/ "GuidePress Premium Subscription").
-
-**Note:** We only have a small number of video at the moment. But we'll be adding more in the coming weeks. 
+We will soon be offering a [Premium subscription](http://guidepress.net/pricing/ "GuidePress Premium Subscription").
 
 
 Main features include:
 
+* There are **over 30 video tutorials** available to watch. 
 * Watch video tutorials without leaving the WordPress dashboard 
 * Videos are discretely placed inside a "video tutorials" dropdown tab 
 * New video tutorials are added every week
@@ -72,6 +72,10 @@ Yes, they are available if you sign up to our premium subscription.
   
 
 == Changelog ==
+
+= 0.1.4 =
+* 30/05/12
+* Added functionality for updating video library immediately after user verification.
 
 = 0.1.3 =
 * 06/05/12
